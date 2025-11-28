@@ -10,8 +10,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "type-check": "tsc --noEmit",
-    "prepare": "husky install",
-    "postinstall": "husky install"
   },
   "keywords": [],
   "author": "",
