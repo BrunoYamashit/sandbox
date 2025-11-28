@@ -18,9 +18,9 @@ echo "√ Branch check passed"
 # 8. Branch Name Validation
 echo ""
 echo "[2/9] Validating branch name..."
-if ! echo "$branch" | grep -qE '^(feature|bugfix|hotfix|release)\/[a-z0-9._-]+$'; then
+if ! echo "$branch" | grep -qE '^(feature|feat|bugfix|hotfix|release)\/[a-z0-9._-]+$'; then
   echo "X Invalid branch name: $branch"
-  echo "X Use format: feature/*, bugfix/*, hotfix/*, or release/*"
+  echo "X Use format: feature/*, feat/, bugfix/*, hotfix/*, or release/*"
   echo "X Example: feature/add-login or bugfix/fix-header"
   exit 1
 fi
@@ -49,14 +49,18 @@ pnpm exec lint-staged || {
 }
 echo "√ Lint-staged checks passed"
 
-# 2. TypeScript Type Checking
+# 2. TypeScript Type Checking (skip if no tsconfig.json)
 echo ""
 echo "[6/9] Running TypeScript type check..."
-pnpm run type-check || {
-  echo "X Type checking failed. Please fix type errors."
-  exit 1
-}
-echo "√ Type checking passed"
+if [ -f "tsconfig.json" ]; then
+  pnpm run type-check || {
+    echo "X Type checking failed. Please fix type errors."
+    exit 1
+  }
+  echo "√ Type checking passed"
+else
+  echo "- Skipping (no tsconfig.json found)"
+fi
 
 # 1. Linting (ESLint)
 echo ""

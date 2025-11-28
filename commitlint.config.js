@@ -15,12 +15,12 @@ module.exports = {
         'perf',
         'ci',
         'build',
-        'revert'
-      ]
+        'revert',
+      ],
     ],
     'subject-case': [2, 'never', ['upper-case']],
     'subject-empty': [2, 'never'],
     'subject-full-stop': [2, 'never', '.'],
-    'type-empty': [2, 'never']
-  }
+    'type-empty': [2, 'never'],
+  },
 };
